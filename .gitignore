@@ -1,0 +1,5 @@
+/bin/
+/examples/*/public/
+/examples/*/resources/
+/examples/*/static/pagefind/
+/examples/*/.hugo_build.lock

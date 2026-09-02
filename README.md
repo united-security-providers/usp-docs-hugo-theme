@@ -137,11 +137,29 @@ copyright: '&copy; 2026 United Security Providers AG. All Rights Reserved.'
 baseURL: 'https://docs.united-security-providers.ch/'
 relativeURLs: true
 
+disableKinds: ['taxonomy', 'term', 'rss']  # a documentation site needs none of these
+
 defaultContentLanguage: en
 defaultContentLanguageInSubdir: false
 languages:
   en:
     contentDir: content/en
+
+# These two blocks produce llms.txt and the markdown copy of every page.
+outputFormats:
+  llms:
+    mediaType: text/plain
+    baseName: llms
+    isPlainText: true
+  markdown:
+    mediaType: text/markdown
+    baseName: index
+    isPlainText: true
+
+outputs:
+  home: ['html', 'llms', 'markdown']
+  section: ['html', 'markdown']
+  page: ['html', 'markdown']
 
 markup:
   goldmark:
@@ -162,6 +180,10 @@ params:
       name: United Security Providers on Linkedin
 ```
 
+Every page tells AI agents that the documentation is indexed at `llms.txt` and
+that the page itself is available as markdown, so leaving the `outputFormats`
+and `outputs` blocks out builds a site whose own pointers lead nowhere.
+
 ## Search
 
 [Pagefind](https://pagefind.app/) indexes the built pages, so Hugo runs twice:
@@ -180,3 +202,15 @@ started on a page of `1.2.x` returns pages of `1.2.x` only. Where no version
 applies - the landing page, the error page - the search instead covers the
 current release of every product, plus the pages that belong to no product at
 all.
+
+## Working on the theme
+
+The theme carries no content of its own, so it is developed against the two
+example sites under `examples/`, one for each arrangement above - the same two
+that CI builds:
+
+```bash
+make serve-multi-product
+make serve-single-product
+make clean
+```

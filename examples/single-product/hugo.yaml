@@ -1,0 +1,46 @@
+theme: usp-docs
+title: 'Example Product C documentation'
+copyright: '&copy; 2026 Example AG. All Rights Reserved.'
+
+baseURL: 'https://docs.example.com/'
+relativeURLs: true
+
+disableKinds: ['taxonomy', 'term', 'rss']
+
+defaultContentLanguage: en
+defaultContentLanguageInSubdir: false
+languages:
+  en:
+    contentDir: content/en
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
+outputFormats:
+  llms:
+    mediaType: text/plain
+    baseName: llms
+    isPlainText: true
+  markdown:
+    mediaType: text/markdown
+    baseName: index
+    isPlainText: true
+
+outputs:
+  home: ['html', 'llms', 'markdown']
+  section: ['html', 'markdown']
+  page: ['html', 'markdown']
+
+params:
+  canonicalBase: 'https://docs.example.com/'
+  description: 'Documentation of the example Product C'
+  logo: images/USP-Logo-2023-ohne-claim-lang-white1.webp
+  eol: ['0.9.x']
+  search:
+    enabled: true
+  social:
+    - icon: linkedin
+      link: https://www.linkedin.com/company/example/
+      name: Example on Linkedin
