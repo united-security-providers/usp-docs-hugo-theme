@@ -1,0 +1,4 @@
+{{- /* Chroma with the theme's stylesheet instead of the inline styles Hugo
+       defaults to - see assets/stylesheets/highlight.css. */ -}}
+{{- $result := transform.HighlightCodeBlock . (dict "noClasses" false) -}}
+{{ $result.Wrapped }}

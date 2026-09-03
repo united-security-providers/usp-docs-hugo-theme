@@ -17,6 +17,9 @@ markup:
   goldmark:
     renderer:
       unsafe: true
+  # This example is the one that switches the syntax highlighting off again.
+  highlight:
+    codeFences: false
 
 outputFormats:
   llms:

@@ -544,6 +544,7 @@ a:hover {
 .usp-prose ol,
 .usp-prose ul,
 .usp-prose pre,
+.usp-prose .highlight,
 .usp-prose figure,
 .usp-prose dl {
     margin: 1em 0;
@@ -603,7 +604,8 @@ a:hover {
     color: var(--usp-link-hover);
 }
 
-.usp-prose pre {
+.usp-prose pre,
+.usp-prose .highlight {
     background-color: var(--usp-code-bg);
     border-radius: 0.1rem;
     color: var(--usp-code-ink);
@@ -616,6 +618,18 @@ a:hover {
     overflow: auto;
     background: none;
     word-break: normal;
+}
+
+/* A highlighted block wraps its pre - with line numbers, two of them in a
+   table - so the wrapper is what carries the margin. */
+.usp-prose .highlight pre {
+    margin: 0;
+}
+
+/* The generated palette brings a background of its own; the theme's wins, which
+   keeps highlight.css exactly as hugo gen chromastyles writes it. */
+.usp-prose .highlight .chroma {
+    background-color: var(--usp-code-bg);
 }
 
 .usp-prose blockquote {

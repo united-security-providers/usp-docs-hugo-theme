@@ -184,6 +184,51 @@ Every page tells AI agents that the documentation is indexed at `llms.txt` and
 that the page itself is available as markdown, so leaving the `outputFormats`
 and `outputs` blocks out builds a site whose own pointers lead nowhere.
 
+## Code blocks
+
+A fenced block with a language is highlighted, with nothing to configure:
+
+````markdown
+```yaml
+server:
+  tls: true
+```
+````
+
+A fence without a language, or with one Chroma does not know, stays plain text.
+
+### Turning the highlighting off
+
+Highlighting is on unless the site says otherwise, and the switch is the site's
+own `hugo.yaml`, in the `markup` block next to the `goldmark` settings above:
+
+```yaml
+markup:
+  highlight:
+    codeFences: false
+```
+
+It applies to the whole site, there is no per-page or per-block variant.
+
+### Changing the colours
+
+The colours belong to the theme, not to the site, so `markup.highlight.style` in
+a site's configuration has no effect. They live in
+`assets/stylesheets/highlight.css` of this repository, generated from the Chroma
+`github` style. To move to another one, pick it from
+https://gohugo.io/quick-reference/syntax-highlighting-styles/ and regenerate the
+file:
+
+```bash
+hugo gen chromastyles --style=<style> > assets/stylesheets/highlight.css
+```
+
+The file is used exactly as generated: the theme overrides the background the
+style brings along with its own, so a regenerated file needs no editing. Pick a
+light style - the surrounding code block stays light. A single site that needs
+its own colours instead can override the `.chroma` classes from its
+`customStylesheet`, which is loaded last.
+
 ## Search
 
 [Pagefind](https://pagefind.app/) indexes the built pages, so Hugo runs twice:
