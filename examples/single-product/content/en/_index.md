@@ -1,8 +1,5 @@
 ---
 title: 'Example Product C documentation'
 linkTitle: 'Home'
+layout: redirect
 ---
-
-# Example Product C
-
-The documentation of the single example product.

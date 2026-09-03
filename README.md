@@ -100,6 +100,15 @@ Anything that points at a product without naming a version:
 lead to the newest release that is still maintained.
 For a product that has no maintained release yet, it leads to `latest` instead.
 
+### Landing page
+
+The landing page can also be skipped altogether. Give the root `_index.md` a
+`layout: redirect` and whoever opens the site is forwarded straight into the
+newest version, the same way a product directory is on a multi-product site.
+
+The logo then leads back to the top of the version being read.
+Set `params.homepage` if the logo should leave the documentation entirely and that address wins in either shape.
+
 ### Marking a release end of life
 
 List the releases you no longer maintain under `params.eol`, written the way

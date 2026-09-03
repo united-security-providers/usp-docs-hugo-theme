@@ -1,9 +1,17 @@
+{{- $home := site.Params.homepage -}}
+{{- if not $home -}}
+  {{- if and .docset (eq site.Home.Layout "redirect") -}}
+    {{- $home = .docset.RelPermalink -}}
+  {{- else -}}
+    {{- $home = relURL "" -}}
+  {{- end -}}
+{{- end -}}
 <header class="usp-header">
   <div class="usp-header__inner">
     <label class="usp-header__drawer" for="__drawer" aria-label="Navigation">
       {{ partial "icons/menu.html" . }}
     </label>
-    <a class="usp-header__logo" href="{{ site.Params.homepage | default (relURL "") }}" aria-label="{{ .siteTitle }}">
+    <a class="usp-header__logo" href="{{ $home }}" aria-label="{{ .siteTitle }}">
       {{ partial "logo.html" .page }}
     </a>
     {{- /* Inside a product the two pickers name the page instead of the title. */ -}}
