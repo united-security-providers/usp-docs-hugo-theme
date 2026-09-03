@@ -1,6 +1,12 @@
 {{- /* Every page of every documented release, in navigation order. */ -}}
 {{- $base := site.Params.canonicalBase -}}
 {{- $dev := "latest" -}}
+{{- /* On a single-product site the children of home are the versions, so home
+       itself is the one product. Detected as in func/docset.html. */ -}}
+{{- $single := false -}}
+{{- with site.GetPage "/latest" }}{{ $single = true }}{{ end -}}
+{{- $products := site.Home.Sections.ByWeight -}}
+{{- if $single }}{{ $products = slice site.Home }}{{ end -}}
 # {{ site.Title }}
 
 > {{ site.Params.description }}
@@ -10,13 +16,13 @@ Every link below points to the markdown source of a page. The page itself is at 
 ## Overview
 
 - [{{ partial "func/label.html" . }}]({{ $base }}index.md)
-{{ range site.Home.Sections.ByWeight }}
+{{ range $products }}
 {{- $product := . -}}
 {{- $versions := slice -}}
 {{- range .Sections }}{{ if eq (path.Base .Path) $dev }}{{ $versions = $versions | append . }}{{ end }}{{ end -}}
 {{- range partial "func/releases.html" . }}{{ $versions = $versions | append . }}{{ end -}}
 {{- range $versions }}
-## {{ $product.LinkTitle }} {{ path.Base .Path }}
+## {{ if not $single }}{{ $product.LinkTitle }} {{ end }}{{ path.Base .Path }}
 {{- if eq (path.Base .Path) $dev }} (under development){{ else if in site.Params.eol (strings.TrimPrefix "/" .Path) }} (end of life){{ end }}
 
 - [{{ partial "func/label.html" . }}]({{ printf "%s%sindex.md" $base (strings.TrimPrefix "/" .RelPermalink) }})

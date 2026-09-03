@@ -1,13 +1,20 @@
 {{- /* Same resolution as for images; a link to a Markdown file becomes that
-       page's URL. */ -}}
+       page's URL. A fragment is kept aside, since it is no part of the page
+       lookup, and re-appended to whatever the lookup returns. */ -}}
 {{- $dest := .Destination -}}
 {{- if not (or (urls.Parse $dest).Scheme (hasPrefix $dest "/") (hasPrefix $dest "#") (hasPrefix $dest "mailto:")) -}}
+  {{- $parts := split $dest "#" -}}
+  {{- $path := index $parts 0 -}}
+  {{- $fragment := "" -}}
+  {{- if gt (len $parts) 1 -}}
+    {{- $fragment = printf "#%s" (delimit (after 1 $parts) "#") -}}
+  {{- end -}}
   {{- $target := "" -}}
-  {{- with .Page.GetPage $dest -}}
+  {{- with .Page.GetPage $path -}}
     {{- $target = .RelPermalink -}}
   {{- else -}}
-    {{- $target = path.Join (path.Dir .Page.File.Path) $dest | relURL -}}
+    {{- $target = path.Join (path.Dir .Page.File.Path) $path | relURL -}}
   {{- end -}}
-  {{- $dest = $target -}}
+  {{- $dest = printf "%s%s" $target $fragment -}}
 {{- end -}}
 <a href="{{ $dest }}"{{ with .Title }} title="{{ . }}"{{ end }}>{{ .Text }}</a>
