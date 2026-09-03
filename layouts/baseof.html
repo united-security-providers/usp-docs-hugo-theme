@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="canonical" href="{{ printf "%s%s" site.Params.canonicalBase (strings.TrimPrefix "/" .RelPermalink) }}">
+    <link rel="canonical" href="{{ .Permalink }}">
     {{- with .Description | default site.Params.description }}
     <meta name="description" content="{{ . }}">
     {{- end }}

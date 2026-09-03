@@ -3,7 +3,7 @@
   {{- range .Pages }}
   {{- if and .RelPermalink (ne .Kind "404") (ne .Layout "redirect") }}
   <url>
-    <loc>{{ printf "%s%s" site.Params.canonicalBase (strings.TrimPrefix "/" .RelPermalink) }}</loc>
+    <loc>{{ .Permalink }}</loc>
     {{- with .Sitemap.ChangeFreq }}
     <changefreq>{{ . }}</changefreq>
     {{- end }}

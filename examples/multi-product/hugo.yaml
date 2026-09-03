@@ -2,8 +2,7 @@ theme: usp-docs
 title: 'Example documentation'
 copyright: '&copy; 2026 Example AG. All Rights Reserved.'
 
-baseURL: 'https://docs.example.com/'
-relativeURLs: true
+baseURL: 'https://docs.example.com/products/'
 
 disableKinds: ['taxonomy', 'term', 'rss']
 
@@ -37,7 +36,6 @@ outputs:
   page: ['html', 'markdown']
 
 params:
-  canonicalBase: 'https://docs.example.com/'
   description: 'Documentation of the example products'
   logo: images/USP-Logo-2023-ohne-claim-lang-white1.webp
   eol: ['product-a/0.5.x']

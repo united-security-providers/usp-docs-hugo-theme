@@ -1,5 +1,4 @@
 {{- /* Every page of every documented release, in navigation order. */ -}}
-{{- $base := site.Params.canonicalBase -}}
 {{- $dev := "latest" -}}
 {{- /* On a single-product site the children of home are the versions, so home
        itself is the one product. Detected as in func/docset.html. */ -}}
@@ -15,7 +14,7 @@ Every link below points to the markdown source of a page. The page itself is at 
 
 ## Overview
 
-- [{{ partial "func/label.html" . }}]({{ $base }}index.md)
+- [{{ partial "func/label.html" . }}]({{ .Permalink }}index.md)
 {{ range $products }}
 {{- $product := . -}}
 {{- $versions := slice -}}
@@ -25,9 +24,9 @@ Every link below points to the markdown source of a page. The page itself is at 
 ## {{ if not $single }}{{ $product.LinkTitle }} {{ end }}{{ path.Base .Path }}
 {{- if eq (path.Base .Path) $dev }} (under development){{ else if in site.Params.eol (strings.TrimPrefix "/" .Path) }} (end of life){{ end }}
 
-- [{{ partial "func/label.html" . }}]({{ printf "%s%sindex.md" $base (strings.TrimPrefix "/" .RelPermalink) }})
+- [{{ partial "func/label.html" . }}]({{ .Permalink }}index.md)
 {{- range partial "func/nav-pages-recursive.html" . }}
-- [{{ partial "func/label.html" . }}]({{ printf "%s%sindex.md" $base (strings.TrimPrefix "/" .RelPermalink) }}){{ with .Description }}: {{ . }}{{ end }}
+- [{{ partial "func/label.html" . }}]({{ .Permalink }}index.md){{ with .Description }}: {{ . }}{{ end }}
 {{- end }}
 {{ end -}}
 {{- end -}}

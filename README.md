@@ -133,9 +133,8 @@ theme: usp-docs
 title: 'USP <Product> documentation'
 copyright: '&copy; 2026 United Security Providers AG. All Rights Reserved.'
 
-# Bare baseURL plus relativeURLs, so the output works under any path prefix.
-baseURL: 'https://docs.united-security-providers.ch/'
-relativeURLs: true
+# The full public address, path prefix included; every URL is built from it.
+baseURL: 'https://docs.united-security-providers.ch/usp-<product>/'
 
 disableKinds: ['taxonomy', 'term', 'rss']  # a documentation site needs none of these
 
@@ -167,7 +166,6 @@ markup:
       unsafe: true                      # only if the content contains raw HTML
 
 params:
-  canonicalBase: 'https://docs.united-security-providers.ch/usp-<product>/'
   description: 'Documentation of the USP <Product>'
   logo: images/USP-Logo-2023-ohne-claim-lang-white1.webp
   customStylesheet: stylesheets/site.css   # optional, in the site's own assets/
@@ -183,6 +181,33 @@ params:
 Every page tells AI agents that the documentation is indexed at `llms.txt` and
 that the page itself is available as markdown, so leaving the `outputFormats`
 and `outputs` blocks out builds a site whose own pointers lead nowhere.
+
+### Where the site is served
+
+Every URL the site emits - navigation, canonical tags, the sitemap, `llms.txt` -
+is built from `baseURL`, so it has to carry the path prefix the site is served
+under. That ties a build to one address. To publish the same content elsewhere,
+a preview of a branch or a staging host, build it again with that address:
+
+```bash
+hugo --baseURL https://preview.united-security-providers.ch/pr-412/
+```
+
+Links, sitemap and redirects all move together; nothing else needs changing.
+
+### Moved pages
+
+A page that has moved keeps its old address working by naming it in the front
+matter, Hugo's built-in `aliases`:
+
+```yaml
+aliases:
+  - /latest/install/
+```
+
+The path is written from the site root, without the prefix. Hugo publishes a
+small redirect page at each old address, built from `baseURL` like everything
+else.
 
 ## Code blocks
 
@@ -259,3 +284,7 @@ make serve-multi-product
 make serve-single-product
 make clean
 ```
+
+Both example sites carry a path prefix in their `baseURL`, so the server prints
+an address that includes it - `http://localhost:1313/product-c/` and not the
+bare root.
