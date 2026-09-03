@@ -2,13 +2,19 @@
 {{- $page := .page -}}
 {{- $children := where $item.Pages "Params.hidden" "!=" true -}}
 {{- if and $item.IsSection $children (not .asLink) -}}
+{{- $open := or (eq $page $item) ($page.IsDescendant $item) -}}
 <li class="usp-nav__section">
-  <span class="usp-nav__label">{{ $item.LinkTitle }}</span>
-  <ul>
-    {{- range $children.ByWeight }}
-      {{ partial "nav-item.html" (dict "item" . "page" $page) }}
-    {{- end }}
-  </ul>
+  <details{{ if $open }} open{{ end }}>
+    <summary class="usp-nav__label">
+      <svg class="usp-nav__caret" viewBox="7 10 10 5" aria-hidden="true"><path d="M7 10l5 5 5-5z"/></svg>
+      <span>{{ $item.LinkTitle }}</span>
+    </summary>
+    <ul>
+      {{- range $children.ByWeight }}
+        {{ partial "nav-item.html" (dict "item" . "page" $page) }}
+      {{- end }}
+    </ul>
+  </details>
 </li>
 {{- else -}}
 {{- /* A product forwards to the release it is entered at; link there directly
