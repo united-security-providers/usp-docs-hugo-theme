@@ -1,3 +1,4 @@
+{{- if ne .Params.toc false -}}
 {{- $headings := partial "func/headings.html" . -}}
 <nav class="usp-toc usp-sidebar" aria-label="Table of contents">
   {{- with $headings }}
@@ -9,3 +10,4 @@
   </ul>
   {{- end }}
 </nav>
+{{- end -}}

@@ -89,6 +89,18 @@ Everything else counts as a release, listed newest first. They are ordered by
 version number and not alphabetically, so `0.10.x` correctly ends up above
 `0.5.x`, and a leading `v` makes no difference.
 
+A site that writes its `latest` in the open but does not want to invite readers
+into it can keep it out of the version dropdown:
+
+```yaml
+params:
+  hideLatest: true
+```
+
+The pages stay published and keep working, links into them included, they are
+only missing from the dropdown. It applies to every product on the site, so a
+product whose only version is `latest` is left with no version dropdown at all.
+
 ### The version visitors land on
 
 Anything that points at a product without naming a version:
@@ -132,6 +144,13 @@ Inside a version the directory tree becomes the sidebar. Each directory appears
 as a heading with its pages listed underneath, and `weight` in a page's front
 matter decides the order among its neighbours. A page with `hidden: true` is
 published as usual but left out of the sidebar.
+
+The headings of a page make up the table of contents on the right. A page that
+is better read without one says so in its front matter:
+
+```yaml
+toc: false
+```
 
 ## Configuration
 

@@ -4,7 +4,9 @@
 {{- $page := .page -}}
 {{- $dev := "latest" -}}
 {{- $ordered := slice -}}
+{{- if not site.Params.hideLatest -}}
 {{- range $docset.Parent.Sections }}{{ if eq (path.Base .Path) $dev }}{{ $ordered = $ordered | append . }}{{ end }}{{ end -}}
+{{- end -}}
 {{- range partial "func/releases.html" $docset.Parent }}{{ $ordered = $ordered | append . }}{{ end -}}
 {{- $items := slice -}}
 {{- range $ordered -}}
