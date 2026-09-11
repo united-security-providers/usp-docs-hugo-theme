@@ -17,4 +17,4 @@
   {{- end -}}
   {{- $dest = printf "%s%s" $target $fragment -}}
 {{- end -}}
-<a href="{{ $dest }}"{{ with .Title }} title="{{ . }}"{{ end }}>{{ .Text }}</a>
+<a href="{{ $dest }}"{{ with .Title }} title="{{ . }}"{{ end }} target="_blank" rel="noopener">{{ .Text }}</a>
