@@ -1,21 +1,27 @@
 HUGO_VERSION := 0.165.0
 PAGEFIND_VERSION := 1.5.2
+LYCHEE_VERSION := 0.24.2
 
 BIN := bin
 HUGO := $(BIN)/hugo-$(HUGO_VERSION)
 PAGEFIND := $(BIN)/pagefind-$(PAGEFIND_VERSION)
+LYCHEE := $(BIN)/lychee-$(LYCHEE_VERSION)
 
 HUGO_BASE := https://github.com/gohugoio/hugo/releases/download/v$(HUGO_VERSION)
 HUGO_ASSET := hugo_extended_$(HUGO_VERSION)_linux-amd64.tar.gz
 PAGEFIND_BASE := https://github.com/Pagefind/pagefind/releases/download/v$(PAGEFIND_VERSION)
 PAGEFIND_ASSET := pagefind_extended-v$(PAGEFIND_VERSION)-x86_64-unknown-linux-musl.tar.gz
+LYCHEE_BASE := https://github.com/lycheeverse/lychee/releases/download/lychee-v$(LYCHEE_VERSION)
+LYCHEE_DIR := lychee-x86_64-unknown-linux-musl
+LYCHEE_ASSET := $(LYCHEE_DIR).tar.gz
 
 EXAMPLES := multi-product single-product
 THEMES_DIR := $(CURDIR)/examples/themes
 HUGO_FLAGS := --themesDir $(THEMES_DIR) --gc --cleanDestinationDir --panicOnWarning
+LYCHEE_FLAGS := --no-progress --include-fragments --index-files index.html
 
 .PHONY: download-tools
-download-tools: $(HUGO) $(PAGEFIND)
+download-tools: $(HUGO) $(PAGEFIND) $(LYCHEE)
 
 $(HUGO):
 	@mkdir -p $(BIN)
@@ -39,10 +45,22 @@ $(PAGEFIND):
 	  tar -xzf "$$tmp/asset" -C "$$tmp" pagefind_extended && \
 	  mv "$$tmp/pagefind_extended" "$@" && chmod +x "$@"
 
+$(LYCHEE):
+	@mkdir -p $(BIN)
+	@echo "Fetching lychee $(LYCHEE_VERSION) into $(BIN)/"
+	@tmp=$$(mktemp -d) && trap 'rm -rf "$$tmp"' EXIT && \
+	  curl -sSfL -o "$$tmp/asset" "$(LYCHEE_BASE)/$(LYCHEE_ASSET)" && \
+	  curl -sSfL "$(LYCHEE_BASE)/$(LYCHEE_ASSET).sha256" \
+	    | sed 's|$(LYCHEE_ASSET)|asset|' > "$$tmp/sum" && \
+	  (cd "$$tmp" && sha256sum -c sum > /dev/null) && \
+	  tar -xzf "$$tmp/asset" -C "$$tmp" --strip-components=1 $(LYCHEE_DIR)/lychee && \
+	  mv "$$tmp/lychee" "$@" && chmod +x "$@"
+
 # The theme has no content of its own, so every target works on one of the
 # example sites under examples/ - the same two the README describes.
 BUILD_TARGETS := $(addprefix build-,$(EXAMPLES))
 SERVE_TARGETS := $(addprefix serve-,$(EXAMPLES))
+CHECK_TARGETS := $(addprefix check-links-,$(EXAMPLES))
 
 .PHONY: $(BUILD_TARGETS)
 $(BUILD_TARGETS): build-%: download-tools
@@ -59,6 +77,23 @@ $(SERVE_TARGETS): serve-%: build-%
 
 .PHONY: build-all
 build-all: $(BUILD_TARGETS)
+
+.PHONY: $(CHECK_TARGETS)
+$(CHECK_TARGETS): check-links-%: build-%
+	@site=$(CURDIR)/examples/$*/public; \
+	base=$$($(HUGO) config --source examples/$* --themesDir $(THEMES_DIR) \
+	          | sed -n "s/^baseurl = '\(.*\)'/\1/p"); \
+	prefix=$$(echo "$$base" | sed -E 's|^[a-z]+://[^/]*/?||; s|/$$||'); \
+	$(LYCHEE) $(LYCHEE_FLAGS) --root-dir "$$site" \
+	          --remap "^file://$$site/$$prefix/ file://$$site/" \
+	          --remap "^file://$$site/$$prefix$$ file://$$site/" \
+	          --remap "^$$base file://$$site/" \
+	          "examples/$*/public/**/*.html" \
+	          "examples/$*/public/**/*.txt" \
+	          "examples/$*/public/**/*.xml"
+
+.PHONY: check-links-all
+check-links-all: $(CHECK_TARGETS)
 
 .PHONY: clean
 clean:

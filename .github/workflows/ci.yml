@@ -17,4 +17,4 @@ jobs:
         with:
           path: bin
           key: tools-${{ runner.os }}-${{ hashFiles('Makefile') }}
-      - run: make build-all
+      - run: make build-all check-links-all
