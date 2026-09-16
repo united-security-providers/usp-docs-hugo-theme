@@ -36,6 +36,10 @@
     {{ partial "agent-note.html" . }}
     <input type="checkbox" id="__drawer" autocomplete="off" hidden>
     <label class="usp-overlay" for="__drawer" aria-hidden="true"></label>
+    <dialog class="usp-lightbox" aria-label="Expanded view">
+      <button type="button" class="usp-lightbox__close" aria-label="Close">&times;</button>
+      <div class="usp-lightbox__body"></div>
+    </dialog>
     {{- with partial "func/first-heading.html" . }}
     <a href="#{{ .ID }}" class="usp-skip">Skip to content</a>
     {{- end }}
