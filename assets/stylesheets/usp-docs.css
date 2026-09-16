@@ -873,6 +873,13 @@ dialog.usp-lightbox {
     background: transparent;
 }
 
+/* A table's own overflow-x:auto can't resolve its max-width:100% against a
+   dialog sized by fit-content, so it never gets a horizontal scrollbar -
+   force a definite width whenever the popup is showing a table. */
+dialog.usp-lightbox:has(.usp-table) {
+    width: 95vw;
+}
+
 dialog.usp-lightbox::backdrop {
     background-color: #0006;
 }
