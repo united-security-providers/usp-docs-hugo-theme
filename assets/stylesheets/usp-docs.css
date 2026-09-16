@@ -649,6 +649,9 @@ a:hover {
 }
 
 .usp-prose table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
     border-collapse: collapse;
     background-color: var(--usp-paper);
     border: var(--usp-hairline) solid var(--usp-line);
