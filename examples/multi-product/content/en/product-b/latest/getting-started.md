@@ -359,3 +359,6 @@ The container versions can be adjusted in the ansible inventory configuration! T
 </tbody>
 </table>
 
+# An image
+
+![Doc Structure Step 1](assets/sample.png)
