@@ -2,7 +2,9 @@
        page's URL. A fragment is kept aside, since it is no part of the page
        lookup, and re-appended to whatever the lookup returns. */ -}}
 {{- $dest := .Destination -}}
-{{- if not (or (urls.Parse $dest).Scheme (hasPrefix $dest "/") (hasPrefix $dest "#") (hasPrefix $dest "mailto:")) -}}
+{{- $url := urls.Parse $dest -}}
+{{- $external := and (hasPrefix $url.Scheme "http") (ne $url.Host (urls.Parse site.BaseURL).Host) -}}
+{{- if not (or $url.Scheme (hasPrefix $dest "/") (hasPrefix $dest "#") (hasPrefix $dest "mailto:")) -}}
   {{- $parts := split $dest "#" -}}
   {{- $path := index $parts 0 -}}
   {{- $fragment := "" -}}
@@ -17,4 +19,4 @@
   {{- end -}}
   {{- $dest = printf "%s%s" $target $fragment -}}
 {{- end -}}
-<a href="{{ $dest }}"{{ with .Title }} title="{{ . }}"{{ end }} target="_blank" rel="noopener">{{ .Text }}</a>
+<a href="{{ $dest }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if $external }} target="_blank" rel="noopener"{{ end }}>{{ .Text }}</a>
