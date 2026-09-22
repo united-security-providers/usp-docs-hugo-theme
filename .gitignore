@@ -3,3 +3,5 @@
 /examples/*/resources/
 /examples/*/static/pagefind/
 /examples/*/.hugo_build.lock
+
+.vscode/
