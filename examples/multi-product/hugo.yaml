@@ -38,6 +38,8 @@ outputs:
 params:
   description: 'Documentation of the example products'
   logo: images/USP-Logo-2023-ohne-claim-lang-white1.webp
+  # Wider than the  theme default, for the wide tables.
+  # contentMaxWidth: 50rem
   eol: ['product-a/0.5.x']
   search:
     enabled: true
