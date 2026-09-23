@@ -6,3 +6,8 @@ min_version = "0.158.0"
 
 [author]
   name = "United Security Providers"
+
+[params]
+  # Maximum width of the content column in the middle, any CSS length.
+  # Sites override it with params.contentMaxWidth in their own configuration.
+  contentMaxWidth = "36.8rem"

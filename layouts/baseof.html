@@ -16,6 +16,9 @@
     {{- with resources.Get "stylesheets/usp-docs.css" }}
     <link rel="stylesheet" href="{{ (. | fingerprint).RelPermalink }}">
     {{- end }}
+    {{- with site.Params.contentMaxWidth }}
+    <style>:root { --usp-content-width: {{ . | safeCSS }}; }</style>
+    {{- end }}
     {{- with resources.Get "stylesheets/highlight.css" }}
     <link rel="stylesheet" href="{{ (. | fingerprint).RelPermalink }}">
     {{- end }}

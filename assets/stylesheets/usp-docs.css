@@ -119,6 +119,7 @@ a:hover {
     display: flex;
     align-items: center;
     height: var(--usp-header-height);
+    max-width: var(--usp-page-width);
     margin: 0 auto;
     padding: 0 0.2rem;
 }
@@ -338,6 +339,7 @@ a:hover {
     grid-template-columns: var(--usp-sidebar-width) minmax(0, 1fr) var(--usp-sidebar-width);
     flex-grow: 1;
     width: 100%;
+    max-width: var(--usp-page-width);
     margin: 0 auto;
     padding-top: 1.5rem;
     align-items: start;
@@ -771,6 +773,7 @@ a:hover {
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
+    max-width: var(--usp-page-width);
     margin: 0 auto;
     padding: 0.2rem;
 }
