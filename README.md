@@ -195,7 +195,7 @@ markup:
 
 params:
   description: 'Documentation of the USP <Product>'
-  logo: images/USP-Logo-2023-ohne-claim-lang-white1.webp
+  logo: images/usp-logo.svg
   customStylesheet: stylesheets/site.css   # optional, in the site's own assets/
   contentMaxWidth: 48rem                   # optional, default 36.8rem
   eol: ['<product>/0.9.x']                 # releases no longer maintained
