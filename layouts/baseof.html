@@ -25,6 +25,8 @@
     {{- with site.Params.customStylesheet }}
     {{- with resources.Get . }}
     <link rel="stylesheet" href="{{ (. | fingerprint).RelPermalink }}">
+    {{- else }}
+    {{- errorf "customStylesheet %q not found in the site's assets/ directory" . }}
     {{- end }}
     {{- end }}
     {{- range .AlternativeOutputFormats }}

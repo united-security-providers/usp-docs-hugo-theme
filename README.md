@@ -206,6 +206,9 @@ params:
       name: United Security Providers on Linkedin
 ```
 
+`customStylesheet` is a path inside the site's own `assets/` directory and is loaded after the theme's stylesheets.
+The build fails if the file isn't there.
+
 The content column in the middle is at most `36.8rem` wide on a wide window,
 and the header, the footer and the two sidebars stay aligned with it. A site
 that wants it wider sets `:root { --usp-content-width: 48rem; }` in its
