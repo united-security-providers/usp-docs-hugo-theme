@@ -2,10 +2,9 @@
        page's URL. A fragment is kept aside, since it is no part of the page
        lookup, and re-appended to whatever the lookup returns. */ -}}
 {{- $dest := .Destination -}}
-{{- /* Only links leaving this site open in a new tab. */ -}}
 {{- $url := urls.Parse $dest -}}
-{{- $external := and (or (in (slice "http" "https") $url.Scheme) (hasPrefix $dest "//")) (ne $url.Host (urls.Parse site.BaseURL).Host) -}}
-{{- if not (or (urls.Parse $dest).Scheme (hasPrefix $dest "/") (hasPrefix $dest "#") (hasPrefix $dest "mailto:")) -}}
+{{- $external := and (hasPrefix $url.Scheme "http") (ne $url.Host (urls.Parse site.BaseURL).Host) -}}
+{{- if not (or $url.Scheme (hasPrefix $dest "/") (hasPrefix $dest "#") (hasPrefix $dest "mailto:")) -}}
   {{- $parts := split $dest "#" -}}
   {{- $path := index $parts 0 -}}
   {{- $fragment := "" -}}
