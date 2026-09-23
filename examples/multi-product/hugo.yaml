@@ -37,7 +37,7 @@ outputs:
 
 params:
   description: 'Documentation of the example products'
-  logo: images/USP-Logo-2023-ohne-claim-lang-white1.webp
+  logo: images/usp-logo.svg
   eol: ['product-a/0.5.x']
   search:
     enabled: true

@@ -4,4 +4,9 @@
 {{- if not (or (urls.Parse $dest).Scheme (hasPrefix $dest "/") (hasPrefix $dest "#")) -}}
   {{- $dest = path.Join (path.Dir .Page.File.Path) $dest | relURL -}}
 {{- end -}}
-<img src="{{ $dest }}" alt="{{ .PlainText }}"{{ with .Title }} title="{{ . }}"{{ end }}>
+{{- $id := printf "usp-zoom-image-%d" .Ordinal -}}
+<button type="button" class="usp-zoomable" popovertarget="{{ $id }}" aria-label="Expand image"><img src="{{ $dest }}" alt="{{ .PlainText }}"{{ with .Title }} title="{{ . }}"{{ end }}></button>
+<span id="{{ $id }}" class="usp-lightbox" popover data-pagefind-ignore>
+  <button type="button" class="usp-lightbox__close" popovertarget="{{ $id }}" popovertargetaction="hide" aria-label="Close">&times;</button>
+  <img class="usp-lightbox__image" src="{{ $dest }}" alt="{{ .PlainText }}" loading="lazy">
+</span>

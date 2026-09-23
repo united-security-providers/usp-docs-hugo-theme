@@ -195,7 +195,7 @@ markup:
 
 params:
   description: 'Documentation of the USP <Product>'
-  logo: images/USP-Logo-2023-ohne-claim-lang-white1.webp
+  logo: images/usp-logo.svg
   customStylesheet: stylesheets/site.css   # optional, in the site's own assets/
   eol: ['<product>/0.9.x']                 # releases no longer maintained
   search:
@@ -205,6 +205,11 @@ params:
       link: https://www.linkedin.com/company/united-security-providers/
       name: United Security Providers on Linkedin
 ```
+
+The content column in the middle is at most `36.8rem` wide on a wide window,
+and the header, the footer and the two sidebars stay aligned with it. A site
+that wants it wider sets `:root { --usp-content-width: 48rem; }` in its
+`customStylesheet`.
 
 Every page tells AI agents that the documentation is indexed at `llms.txt` and
 that the page itself is available as markdown, so leaving the `outputFormats`

@@ -1,21 +1,8 @@
 ---
-title: 'Getting started'
-description: 'Install and start Product C latest'
-weight: 10
-aliases:
-  - /latest/install/
+title: 'Wide content'
+description: 'Wide tables and images in Product B'
+weight: 30
 ---
-
-## Install
-
-Install Product C latest, then start it with a minimal configuration:
-
-```yaml
-# /etc/product-c/config.yaml
-server:
-  port: 8443
-  tls: true
-```
 
 > [!NOTE]
 > Text from "A Scandal in Bohemia" by Arthur Conan Doyle, Public Domain
@@ -332,7 +319,7 @@ He chuckled to himself and rubbed his long, nervous hands together.
 “It is simplicity itself,” said he; “my eyes tell me that on the inside of your left shoe, just where the firelight strikes it, the leather is scored by six almost parallel cuts. Obviously they have been caused by someone who has very carelessly scraped round the edges of the sole in order to remove crusted mud from it. Hence, you see, my double deduction that you had been out in vile weather, and that you had a particularly malignant boot-slitting specimen of the London slavey. As to your practice, if a gentleman walks into my rooms smelling of iodoform, with a black mark of nitrate of silver upon his right forefinger, and a bulge on the right side of his top-hat to show where he has secreted his stethoscope, I must be dull, indeed, if I do not pronounce him to be an active member of the medical profession.”
 
 
-![Sample image, from https://medium.com/dawidnaude/6-simple-diagrams-to-help-understand-complexity-in-problem-solving-3b337c4271c4](assets/sample.png)
+![Wide sample image](assets/sample.png)
 
 
 I could not help laughing at the ease with which he explained his process of deduction. “When I hear you give your reasons,” I remarked, “the thing always appears to me to be so ridiculously simple that I could easily do it myself, though at each successive instance of your reasoning I am baffled until you explain your process. And yet I believe that my eyes are as good as yours.”

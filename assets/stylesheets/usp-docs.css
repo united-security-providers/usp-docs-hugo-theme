@@ -119,6 +119,7 @@ a:hover {
     display: flex;
     align-items: center;
     height: var(--usp-header-height);
+    max-width: var(--usp-page-width);
     margin: 0 auto;
     padding: 0 0.2rem;
 }
@@ -338,6 +339,7 @@ a:hover {
     grid-template-columns: var(--usp-sidebar-width) minmax(0, 1fr) var(--usp-sidebar-width);
     flex-grow: 1;
     width: 100%;
+    max-width: var(--usp-page-width);
     margin: 0 auto;
     padding-top: 1.5rem;
     align-items: start;
@@ -645,8 +647,6 @@ a:hover {
 .usp-table {
     position: relative;
     margin: 1em 0;
-    max-width: 100%;
-    overflow: auto;
 }
 
 .usp-prose table {
@@ -771,6 +771,7 @@ a:hover {
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
+    max-width: var(--usp-page-width);
     margin: 0 auto;
     padding: 0.2rem;
 }
@@ -865,33 +866,23 @@ a:hover {
     outline-offset: 0.15rem;
 }
 
-dialog.usp-lightbox {
+.usp-lightbox {
     max-width: 95vw;
     max-height: 95vh;
     padding: 0;
     border: 0;
     background: transparent;
-}
-
-/* A table's own overflow-x:auto can't resolve its max-width:100% against a
-   dialog sized by fit-content, so it never gets a horizontal scrollbar -
-   force a definite width whenever the popup is showing a table. */
-dialog.usp-lightbox:has(.usp-table) {
-    width: 95vw;
-}
-
-dialog.usp-lightbox::backdrop {
-    background-color: #0006;
-}
-
-.usp-lightbox__body {
-    max-width: 100%;
-    max-height: 95vh;
     overflow: auto;
 }
 
-.usp-lightbox__body .usp-table {
-    margin: 0;
+/* A table's max-width:100% can't resolve against a fit-content popover, so it
+   would never scroll sideways. */
+.usp-lightbox:has(table) {
+    width: 95vw;
+}
+
+.usp-lightbox::backdrop {
+    background-color: #0006;
 }
 
 .usp-lightbox__image {

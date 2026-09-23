@@ -34,7 +34,8 @@ outputs:
 
 params:
   description: 'Documentation of the example Product C'
-  logo: images/USP-Logo-2023-ohne-claim-lang-white1.webp
+  customStylesheet: site.css
+  logo: images/usp-logo.svg
   eol: ['0.9.x']
   search:
     enabled: true
