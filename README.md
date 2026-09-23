@@ -197,7 +197,6 @@ params:
   description: 'Documentation of the USP <Product>'
   logo: images/usp-logo.svg
   customStylesheet: stylesheets/site.css   # optional, in the site's own assets/
-  contentMaxWidth: 48rem                   # optional, default 36.8rem
   eol: ['<product>/0.9.x']                 # releases no longer maintained
   search:
     enabled: true                          # needs the Pagefind index, see below
@@ -207,9 +206,10 @@ params:
       name: United Security Providers on Linkedin
 ```
 
-`contentMaxWidth` caps how wide the content column in the middle can grow on
-a wide window. It takes any CSS length, `48rem` or `900px` alike, and defaults
-to `36.8rem`. The header, the footer and the two sidebars stay aligned with it.
+The content column in the middle is at most `36.8rem` wide on a wide window,
+and the header, the footer and the two sidebars stay aligned with it. A site
+that wants it wider sets `:root { --usp-content-width: 48rem; }` in its
+`customStylesheet`.
 
 Every page tells AI agents that the documentation is indexed at `llms.txt` and
 that the page itself is available as markdown, so leaving the `outputFormats`

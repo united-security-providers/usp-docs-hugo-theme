@@ -1,23 +1,36 @@
 {{- /* Wide tables scroll on their own, so the page never scrolls sideways. */ -}}
+{{- $id := printf "usp-zoom-table-%d" .Ordinal -}}
+{{- $table := partial "inline/usp-table.html" . -}}
 <div class="usp-table">
-  <table>
-    <thead>
-      {{- range .THead }}
-      <tr>
-        {{- range . }}
-        <th{{ with .Alignment }} style="text-align: {{ . }}"{{ end }}>{{ .Text }}</th>
-        {{- end }}
-      </tr>
-      {{- end }}
-    </thead>
-    <tbody>
-      {{- range .TBody }}
-      <tr>
-        {{- range . }}
-        <td{{ with .Alignment }} style="text-align: {{ . }}"{{ end }}>{{ .Text }}</td>
-        {{- end }}
-      </tr>
-      {{- end }}
-    </tbody>
-  </table>
+  {{ $table }}
+  <button type="button" class="usp-table__expand" popovertarget="{{ $id }}" aria-label="Expand table">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 4h6v2H6v4H4V4zm10 0h6v6h-2V6h-4V4zM4 14h2v4h4v2H4v-6zm16 0v6h-6v-2h4v-4h2z"/></svg>
+  </button>
+  <div id="{{ $id }}" class="usp-lightbox" popover data-pagefind-ignore>
+    <button type="button" class="usp-lightbox__close" popovertarget="{{ $id }}" popovertargetaction="hide" aria-label="Close">&times;</button>
+    {{ $table }}
+  </div>
 </div>
+
+{{- define "_partials/inline/usp-table.html" -}}
+<table>
+  <thead>
+    {{- range .THead }}
+    <tr>
+      {{- range . }}
+      <th{{ with .Alignment }} style="text-align: {{ . }}"{{ end }}>{{ .Text }}</th>
+      {{- end }}
+    </tr>
+    {{- end }}
+  </thead>
+  <tbody>
+    {{- range .TBody }}
+    <tr>
+      {{- range . }}
+      <td{{ with .Alignment }} style="text-align: {{ . }}"{{ end }}>{{ .Text }}</td>
+      {{- end }}
+    </tr>
+    {{- end }}
+  </tbody>
+</table>
+{{- end -}}

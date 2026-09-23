@@ -38,8 +38,6 @@ outputs:
 params:
   description: 'Documentation of the example products'
   logo: images/usp-logo.svg
-  # Wider than the  theme default, for the wide tables.
-  # contentMaxWidth: 50rem
   eol: ['product-a/0.5.x']
   search:
     enabled: true

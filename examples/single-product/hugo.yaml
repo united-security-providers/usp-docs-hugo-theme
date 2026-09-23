@@ -34,9 +34,8 @@ outputs:
 
 params:
   description: 'Documentation of the example Product C'
+  customStylesheet: site.css
   logo: images/usp-logo.svg
-  # Wider than the  theme default, for the wide tables.
-  contentMaxWidth: 50rem
   eol: ['0.9.x']
   search:
     enabled: true
