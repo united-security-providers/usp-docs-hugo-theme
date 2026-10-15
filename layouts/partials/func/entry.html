@@ -4,6 +4,6 @@
 {{- with partial "func/newest-release.html" . -}}
   {{- $entry = . -}}
 {{- else -}}
-  {{- with site.GetPage (printf "%s/latest" .Path) }}{{ $entry = . }}{{ end -}}
+  {{- with site.GetPage (path.Join .Path "latest") }}{{ $entry = . }}{{ end -}}
 {{- end -}}
 {{- return $entry -}}

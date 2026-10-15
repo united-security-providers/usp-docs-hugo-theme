@@ -18,7 +18,7 @@
       {{- with $newest }}
       <a href="{{ partial "func/version-href.html" (dict "version" . "docset" $docset "page" $page) }}">Go to the {{ path.Base .Path }} release.</a>
       {{- else }}
-      {{- with site.GetPage (printf "%s/latest" $docset.Parent.Path) }}
+      {{- with site.GetPage (path.Join $docset.Parent.Path "latest") }}
       <a href="{{ partial "func/version-href.html" (dict "version" . "docset" $docset "page" $page) }}">Go to the documentation under development.</a>
       {{- end }}
       {{- end }}

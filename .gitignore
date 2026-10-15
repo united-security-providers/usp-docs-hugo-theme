@@ -5,3 +5,4 @@
 /examples/*/.hugo_build.lock
 
 .vscode/
+.idea/
