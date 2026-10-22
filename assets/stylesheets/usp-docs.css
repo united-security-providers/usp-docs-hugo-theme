@@ -21,14 +21,16 @@
     --usp-footer-ink: #ffffffb3;
     --usp-footer-ink-faint: #ffffff73;
 
-    --usp-hint: #448aff;
-    --usp-hint-bg: #448aff1a;
+    --usp-hint: #00c853;
+    --usp-hint-bg: #00c8531a;
     --usp-warning: #ff9100;
     --usp-warning-bg: #ff91001a;
     --usp-danger: #ff5252;
     --usp-danger-bg: #ff52521a;
     --usp-note: #00b0ff;
     --usp-note-bg: #00b0ff1a;
+    --usp-important: #7c4dff;
+    --usp-important-bg: #7c4dff1a;
 
     /* The logo sets the header height: the image plus air and link padding. */
     --usp-logo-height: 2rem;
@@ -756,6 +758,15 @@ a:hover {
 
 .usp-admonition--note .usp-admonition__title {
     color: var(--usp-note);
+}
+
+.usp-admonition--important {
+    border-color: var(--usp-important);
+    background-color: var(--usp-important-bg);
+}
+
+.usp-admonition--important .usp-admonition__title {
+    color: var(--usp-important);
 }
 
 /* footer */
