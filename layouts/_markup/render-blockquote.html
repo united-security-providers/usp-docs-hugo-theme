@@ -1,4 +1,6 @@
-{{- if eq .Type "alert" -}}
+{{- if and (eq .Type "alert") (eq (lower .AlertType) "changed") -}}
+  <div class="usp-changed">{{ .Text }}</div>
+{{- else if eq .Type "alert" -}}
   {{- $types := dict "tip" (slice "hint" "Hint") "warning" (slice "warning" "Warning")
                      "note" (slice "note" "Note") "caution" (slice "danger" "Danger")
                      "important" (slice "important" "Important") -}}
