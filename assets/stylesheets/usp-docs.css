@@ -769,6 +769,22 @@ a:hover {
     color: var(--usp-important);
 }
 
+/* change marker */
+
+.usp-changed {
+    margin: 1em 0;
+    padding-left: 0.8rem;
+    border-left: 0.2rem solid var(--usp-danger);
+}
+
+.usp-changed > :first-child {
+    margin-top: 0;
+}
+
+.usp-changed > :last-child {
+    margin-bottom: 0;
+}
+
 /* footer */
 
 .usp-footer {
